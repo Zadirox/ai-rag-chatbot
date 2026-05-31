@@ -44,7 +44,7 @@ export function searchChunks(queryEmbedding: number[], documents: DocumentRecord
   return scored.slice(0, topK).map((s) => s.chunk);
 }
 
-const STORAGE_KEY = "docubot-documents";
+const STORAGE_KEY = "smartbot-documents";
 
 export function loadDocuments(): DocumentRecord[] {
   if (typeof window === "undefined") return [];

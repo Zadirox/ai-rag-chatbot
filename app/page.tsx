@@ -23,8 +23,8 @@ import {
   X,
 } from "lucide-react";
 
-const STORAGE_KEY_CHAT = "docubot-chat";
-const STORAGE_KEY_API = "docubot-api-key";
+const STORAGE_KEY_CHAT = "smartbot-chat";
+const STORAGE_KEY_API = "smartbot-api-key";
 
 function loadChat(): ChatMessageData[] {
   if (typeof window === "undefined") return [];
@@ -234,13 +234,13 @@ export default function ChatPage() {
   }, []);
 
   const handleExportChat = useCallback(() => {
-    const lines = messages.map((m) => `${m.role === "user" ? t.chat.you || "You" : "DocuBot"}: ${m.content}`);
-    const header = `# DocuBot Chat Export\n${t.export.date}: ${new Date().toLocaleDateString()}\n\n---\n\n`;
+    const lines = messages.map((m) => `${m.role === "user" ? t.chat.you || "You" : "SmartBot"}: ${m.content}`);
+    const header = `# SmartBot Chat Export\n${t.export.date}: ${new Date().toLocaleDateString()}\n\n---\n\n`;
     const blob = new Blob([header + lines.join("\n\n")], { type: "text/markdown" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `docubot-chat-${new Date().toISOString().slice(0, 10)}.md`;
+    a.download = `smartbot-chat-${new Date().toISOString().slice(0, 10)}.md`;
     a.click();
     URL.revokeObjectURL(url);
   }, [messages, t]);
@@ -266,7 +266,7 @@ export default function ChatPage() {
         <div className="flex items-center gap-2">
           <Bot size={16} className="text-accent" />
           <span className="font-mono text-sm font-semibold text-accent">
-            Docu<span className="text-muted">Bot</span>
+              Smart<span className="text-muted">Bot</span>
           </span>
         </div>
         <button onClick={() => { setShowSidebar(false); setMobileSidebar(false); }} className="text-muted transition-colors hover:text-foreground">

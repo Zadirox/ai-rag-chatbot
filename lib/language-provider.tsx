@@ -16,7 +16,7 @@ const emptySubscribe = () => () => {};
 function getInitialLang(): Lang {
   if (typeof window === "undefined") return "en";
   try {
-    const saved = localStorage.getItem("docubot-lang");
+    const saved = localStorage.getItem("smartbot-lang");
     if (saved === "ru" || saved === "en") return saved;
   } catch {}
   return "en";
@@ -29,7 +29,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const toggleLang = useCallback(() => {
     setLang((prev) => {
       const next = prev === "en" ? "ru" : "en";
-      localStorage.setItem("docubot-lang", next);
+      localStorage.setItem("smartbot-lang", next);
       return next;
     });
   }, []);

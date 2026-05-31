@@ -108,7 +108,7 @@ export async function queryRAG(
     .map((s, i) => `[Source ${i + 1} — ${s.docName}${s.pageIndex ? `, page ${s.pageIndex + 1}` : ""}, chunk ${s.chunkIndex}]:\n${s.text}`)
     .join("\n\n");
 
-  const systemPrompt = `You are DocuBot, an AI assistant that answers questions based on the provided document context. 
+  const systemPrompt = `You are SmartBot, an AI assistant that answers questions based on the provided document context. 
 
 Rules:
 - Answer ONLY based on the provided sources. If the sources don't contain enough information, say so.

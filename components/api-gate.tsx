@@ -16,7 +16,7 @@ export function ApiGate({ onSubmit, onDemo }: ApiGateProps) {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (key.trim().startsWith("sk-")) {
-      localStorage.setItem("docubot-api-key", key.trim());
+      localStorage.setItem("smartbot-api-key", key.trim());
       onSubmit(key.trim());
     }
   }

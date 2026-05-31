@@ -15,7 +15,7 @@ Financial Highlights
 The largest revenue segment was SaaS subscriptions at $1.68M, followed by consulting services at $780K, and custom development at $380K. Recurring revenue now accounts for 59% of total revenue, up from 42% in 2024.
 
 Product Development
-In 2025, we launched DocuBot, an AI-powered document assistant that uses RAG technology to provide cited answers from uploaded documents. The product achieved 2,400 active users within 6 months of launch, with a 72% retention rate after 30 days.
+In 2025, we launched SmartBot, an AI-powered document assistant that uses RAG technology to provide cited answers from uploaded documents. The product achieved 2,400 active users within 6 months of launch, with a 72% retention rate after 30 days.
 
 We also released Dashboard Pro 2.0, featuring real-time analytics, multi-currency support (USD, EUR, KZT, RUB), and a bilingual interface (English/Russian). Enterprise adoption grew 180% following the update.
 
@@ -28,13 +28,13 @@ Market Expansion
 Kazakhstan became our second-largest market with $620K in revenue. Key partnerships were established with Kaspi Bank and KazakhTelecom. The Uzbekistan market generated $280K, with strong demand for our AI chatbot solutions.
 
 Outlook for 2026
-We project revenue of $4.2M, driven by expansion into Azerbaijan and Kyrgyzstan. DocuBot 2.0 with multi-document Q&A is scheduled for Q2. Hiring target is 120 employees by year-end, with particular focus on sales and customer success roles.`;
+We project revenue of $4.2M, driven by expansion into Azerbaijan and Kyrgyzstan. SmartBot 2.0 with multi-document Q&A is scheduled for Q2. Hiring target is 120 employees by year-end, with particular focus on sales and customer success roles.`;
 
 const DEMO_ANSWERS: Record<string, string> = {
   revenue: `Based on the document [Source 1], **Zadirox Technologies** achieved total revenue of **$2,840,000** in fiscal year 2025, a **34% increase** year-over-year.\n\nRevenue breakdown:\n- SaaS subscriptions: $1.68M (59% of total)\n- Consulting services: $780K\n- Custom development: $380K\n\nThe profit margin improved from 27.1% to **32.4%**.`,
   team: `According to the report [Source 1], the team grew significantly:\n\n- **Total employees**: 78 (up from 45)\n- **Engineering team**: doubled from 18 to 36 engineers\n- New specialists in AI/ML, cybersecurity, and DevOps\n- **Employee satisfaction**: 4.2/5.0\n- **Turnover**: decreased to 8% (from 15%)\n\nA formal remote work policy was established for the CIS region.`,
-  product: `The document highlights two major products [Source 1]:\n\n**DocuBot** — AI document assistant using RAG:\n- 2,400 active users in 6 months\n- 72% retention rate after 30 days\n\n**Dashboard Pro 2.0**:\n- Real-time analytics\n- Multi-currency (USD, EUR, KZT, RUB)\n- Bilingual interface (EN/RU)\n- Enterprise adoption grew **180%**`,
-  plan: `The 2026 outlook [Source 1] includes:\n\n- Projected revenue: **$4.2M**\n- Expansion into **Azerbaijan** and **Kyrgyzstan**\n- **DocuBot 2.0** with multi-document Q&A in Q2\n- Hiring target: **120 employees** by year-end\n- Focus on sales and customer success roles`,
+  product: `The document highlights two major products [Source 1]:\n\n**SmartBot** — AI document assistant using RAG:\n- 2,400 active users in 6 months\n- 72% retention rate after 30 days\n\n**Dashboard Pro 2.0**:\n- Real-time analytics\n- Multi-currency (USD, EUR, KZT, RUB)\n- Bilingual interface (EN/RU)\n- Enterprise adoption grew **180%**`,
+  plan: `The 2026 outlook [Source 1] includes:\n\n- Projected revenue: **$4.2M**\n- Expansion into **Azerbaijan** and **Kyrgyzstan**\n- **SmartBot 2.0** with multi-document Q&A in Q2\n- Hiring target: **120 employees** by year-end\n- Focus on sales and customer success roles`,
 };
 
 function matchDemoAnswer(question: string): string {
@@ -43,7 +43,7 @@ function matchDemoAnswer(question: string): string {
   if (q.includes("team") || q.includes("employee") || q.includes("hire") || q.includes("команд") || q.includes("сотрудник") || q.includes("найм")) return DEMO_ANSWERS.team;
   if (q.includes("product") || q.includes("docubot") || q.includes("dashboard") || q.includes("продукт") || q.includes("дашборд")) return DEMO_ANSWERS.product;
   if (q.includes("2026") || q.includes("outlook") || q.includes("plan") || q.includes("future") || q.includes("план") || q.includes("будущ") || q.includes("перспектив")) return DEMO_ANSWERS.plan;
-  return `Based on the Annual Report 2025 [Source 1], Zadirox Technologies had a strong year with **$2.84M revenue** (+34% YoY) and **$920K net profit** (+58% YoY). The company expanded into Kazakhstan, Uzbekistan, and Georgia, and launched DocuBot which reached 2,400 active users.\n\nTry asking about **revenue**, **team**, **products**, or **2026 plans** for more details.`;
+  return `Based on the Annual Report 2025 [Source 1], Zadirox Technologies had a strong year with **$2.84M revenue** (+34% YoY) and **$920K net profit** (+58% YoY). The company expanded into Kazakhstan, Uzbekistan, and Georgia, and launched SmartBot which reached 2,400 active users.\n\nTry asking about **revenue**, **team**, **products**, or **2026 plans** for more details.`;
 }
 
 export function createDemoDocument(): DocumentRecord {
@@ -57,8 +57,8 @@ export function createDemoDocument(): DocumentRecord {
     size: 245000,
     chunkCount: chunks.length,
     uploadedAt: new Date().toISOString(),
-    summary: "Zadirox Technologies achieved $2.84M revenue in 2025 (+34% YoY) with $920K net profit. Key products: DocuBot (2,400 users) and Dashboard Pro 2.0. Expanded to Kazakhstan, Uzbekistan, Georgia.",
-    keyTerms: ["Revenue", "DocuBot", "Dashboard Pro", "Expansion", "RAG", "SaaS", "Engineering"],
+    summary: "Zadirox Technologies achieved $2.84M revenue in 2025 (+34% YoY) with $920K net profit. Key products: SmartBot (2,400 users) and Dashboard Pro 2.0. Expanded to Kazakhstan, Uzbekistan, Georgia.",
+    keyTerms: ["Revenue", "SmartBot", "Dashboard Pro", "Expansion", "RAG", "SaaS", "Engineering"],
     chunks: chunks.map((text, i) => ({
       id: `demo-chunk-${i}`,
       docId: "demo-doc-1",

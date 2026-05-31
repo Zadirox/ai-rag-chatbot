@@ -16,7 +16,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "DocuBot — AI Knowledge Assistant",
+  title: "SmartBot — AI Knowledge Assistant",
   description: "Upload documents, ask questions, get answers with citations. RAG-powered AI chatbot.",
   authors: [{ name: "Dmitry", url: "https://github.com/Zadirox" }],
 };

@@ -3,11 +3,11 @@ export type Lang = "en" | "ru";
 export const t = {
   en: {
     header: {
-      title: "DocuBot",
+      title: "SmartBot",
       subtitle: "AI Knowledge Assistant",
     },
     apiGate: {
-      title: "Welcome to DocuBot",
+      title: "Welcome to SmartBot",
       desc: "Enter your OpenAI API key to start chatting with your documents.",
       keyLabel: "OpenAI API Key",
       keyPlaceholder: "sk-...",
@@ -76,11 +76,11 @@ export const t = {
   },
   ru: {
     header: {
-      title: "DocuBot",
+      title: "SmartBot",
       subtitle: "ИИ-ассистент для документов",
     },
     apiGate: {
-      title: "Добро пожаловать в DocuBot",
+      title: "Добро пожаловать в SmartBot",
       desc: "Введите ваш OpenAI API ключ, чтобы начать общение с документами.",
       keyLabel: "OpenAI API ключ",
       keyPlaceholder: "sk-...",
