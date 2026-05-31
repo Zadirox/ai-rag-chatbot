@@ -5,6 +5,7 @@ import { useLanguage } from "@/lib/language-provider";
 import { getOpenAIClient, queryRAG, processDocument, generateSummary, extractKeyTerms } from "@/lib/rag-engine";
 import { parseFile } from "@/lib/document-parser";
 import { loadDocuments, saveDocuments, clearDocuments, type DocumentRecord } from "@/lib/vector-store";
+import { createDemoDocument, getDemoStreamResponse } from "@/lib/demo-mode";
 import { ApiGate } from "@/components/api-gate";
 import { ChatMessage, TypingIndicator, type ChatMessageData } from "@/components/chat-message";
 import { DocumentUploader, DocumentCard } from "@/components/document-uploader";
@@ -55,6 +56,7 @@ export default function ChatPage() {
     const saved = localStorage.getItem(STORAGE_KEY_API);
     return saved?.startsWith("sk-") ? saved : null;
   });
+  const [isDemo, setIsDemo] = useState(false);
   const [messages, setMessages] = useState<ChatMessageData[]>(() => loadChat());
   const [documents, setDocuments] = useState<DocumentRecord[]>(() => loadDocuments());
   const [input, setInput] = useState("");
@@ -79,6 +81,7 @@ export default function ChatPage() {
 
   const handleUpload = useCallback(
     async (file: File) => {
+      if (isDemo) return;
       if (!apiKey) return;
       const client = getOpenAIClient(apiKey);
       setUploadStatus("processing");
@@ -120,7 +123,7 @@ export default function ChatPage() {
         setTimeout(() => setUploadStatus("idle"), 3000);
       }
     },
-    [apiKey]
+    [apiKey, isDemo]
   );
 
   const handleDeleteDoc = useCallback(
@@ -135,7 +138,8 @@ export default function ChatPage() {
   );
 
   const handleSend = useCallback(async () => {
-    if (!input.trim() || !apiKey || isStreaming) return;
+    if (!input.trim() || isStreaming) return;
+    if (!apiKey && !isDemo) return;
     const question = input.trim();
     setInput("");
 
@@ -150,9 +154,15 @@ export default function ChatPage() {
     setIsStreaming(true);
 
     try {
-      const client = getOpenAIClient(apiKey);
-      const history = updatedMessages.map((m) => ({ role: m.role, content: m.content }));
-      const stream = await queryRAG(client, question, documents, history);
+      let stream: ReadableStream<Uint8Array>;
+
+      if (isDemo) {
+        stream = getDemoStreamResponse(question);
+      } else {
+        const client = getOpenAIClient(apiKey!);
+        const history = updatedMessages.map((m) => ({ role: m.role, content: m.content }));
+        stream = await queryRAG(client, question, documents, history);
+      }
 
       const reader = stream.getReader();
       let fullText = "";
@@ -216,7 +226,7 @@ export default function ChatPage() {
     } finally {
       setIsStreaming(false);
     }
-  }, [input, apiKey, isStreaming, messages, documents, t]);
+  }, [input, apiKey, isDemo, isStreaming, messages, documents, t]);
 
   const handleClearChat = useCallback(() => {
     setMessages([]);
@@ -238,10 +248,17 @@ export default function ChatPage() {
   const handleNewApiKey = useCallback((newKey: string) => {
     localStorage.setItem(STORAGE_KEY_API, newKey);
     setApiKey(newKey);
+    setIsDemo(false);
     setShowApiModal(false);
   }, []);
 
-  if (!apiKey) return <ApiGate onSubmit={handleApiKeySubmit} />;
+  const handleDemo = useCallback(() => {
+    setIsDemo(true);
+    const demoDoc = createDemoDocument();
+    setDocuments([demoDoc]);
+  }, []);
+
+  if (!apiKey && !isDemo) return <ApiGate onSubmit={handleApiKeySubmit} onDemo={handleDemo} />;
 
   const sidebarContent = (
     <>

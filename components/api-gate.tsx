@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import { useLanguage } from "@/lib/language-provider";
-import { Key, ArrowRight, Shield, ExternalLink } from "lucide-react";
+import { Key, ArrowRight, Shield, ExternalLink, Sparkles } from "lucide-react";
 
 interface ApiGateProps {
   onSubmit: (key: string) => void;
+  onDemo: () => void;
 }
 
-export function ApiGate({ onSubmit }: ApiGateProps) {
+export function ApiGate({ onSubmit, onDemo }: ApiGateProps) {
   const { t } = useLanguage();
   const [key, setKey] = useState("");
 
@@ -59,6 +60,16 @@ export function ApiGate({ onSubmit }: ApiGateProps) {
             </button>
           </div>
         </form>
+
+        <div className="mt-3">
+          <button
+            onClick={onDemo}
+            className="flex w-full items-center justify-center gap-2 rounded-xl border border-lavender bg-lavender/30 py-2.5 text-sm font-medium text-purple-300 transition-all hover:bg-lavender/50"
+          >
+            <Sparkles size={14} />
+            {t.apiGate.tryDemo}
+          </button>
+        </div>
 
         <a
           href="https://platform.openai.com/api-keys"

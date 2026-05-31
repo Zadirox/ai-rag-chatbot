@@ -16,6 +16,7 @@ export const t = {
       docsHint: "Get your key at platform.openai.com/api-keys",
       cancel: "Cancel",
       save: "Save",
+      tryDemo: "Try Demo — no API key needed",
     },
     chat: {
       placeholder: "Ask a question about your documents...",
@@ -88,6 +89,7 @@ export const t = {
       docsHint: "Получите ключ на platform.openai.com/api-keys",
       cancel: "Отмена",
       save: "Сохранить",
+      tryDemo: "Попробовать демо — без API ключа",
     },
     chat: {
       placeholder: "Задайте вопрос по вашим документам...",
